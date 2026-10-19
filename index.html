@@ -178,16 +178,16 @@
             <h3 class="title is-4">Objectives:</h3>
             <ul>
               <li>
-                Build a <strong>generalist</strong> humanoid robot capable of complex, long-horizon manipulation tasks.
+                Infer a dense 3D soft-object state (point cloud) from partial point-cloud observations.
               </li>
               <li>
-                Use <strong>goal-conditioned</strong> imitation learning with generative methods. No simulation, no reward design, or task labels required.
+                Predict future states over a desired horizon, conditioned on robot actions, estimated state history and a <strong>context demonstration</strong>.
               </li>
               <li>
-                Learn from <strong>play data</strong>: open-ended, diverse, exploratory demonstrations not tied to specific tasks or goals.
+                Use variable-length context demonstrations so the model can <strong>infer latent shape/material properties</strong> for dynamics prediction without weight updates.
               </li>
               <li>
-                Play data is easier and cheaper to collect, enabling scalable training across multiple tasks and environments.
+                Integrate the world model with a <strong>goal-conditioned action planner</strong> to generate action proposals and select the one expected to reach the target configuration.
               </li>
             </ul>
           </div>
@@ -199,10 +199,10 @@
             <h3 class="title is-4">Challenges:</h3>
             <ul>
               <li>
-                <strong>Optimality</strong>: Play data contains both direct and inefficient paths to reach goals. Agents must identify and prefer the most efficient actions.
+                <strong>State Estimation</strong>: Soft objects have high DOFs, and important parts are often occluded, making it hard to infer the full object state from partial point-cloud observations.
               </li>
               <li>
-                <strong>Stitching</strong>: Full paths to specific distant goals are rarely demonstrated in play data. Agents must learn to piece together meaningful segments to reach long-horizon targets. 
+                <strong>Dynamics Prediction</strong>: Deformations depend strongly on latent material properties, current unseen shape, and contact/grasp conditions, so the same action can lead to different outcomes. 
               </li>
             </ul>
           </div>
