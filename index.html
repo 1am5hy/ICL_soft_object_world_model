@@ -1,0 +1,527 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <link rel="icon" href="./resources/favicon.ico">
+  <meta charset="utf-8">
+  <meta name="description" content="ICL_soft_object_world_model: In-Context Learning World Models for Soft Garment Manipulation with Partial Observations">
+  <meta name="keywords" content="World Models, In-Context Learning, Soft Objects, Humanoid Robot, TienKung Robot, Flow Matching, Diffusion, Generative AI, Learning">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>ICL_soft_object_world_model</title>
+  <link href="https://fonts.googleapis.com/css?family=Google+Sans|Noto+Sans|Castoro" rel="stylesheet">
+  <link rel="stylesheet" href="./static/css/bulma.min.css">
+  <link rel="stylesheet" href="./static/css/bulma-carousel.min.css">
+  <link rel="stylesheet" href="./static/css/bulma-slider.min.css">
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/jpswalsh/academicons@1/css/academicons.min.css">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+  <link rel="stylesheet" href="./static/css/index.css">
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.3.1/dist/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+  <script src="https://www.youtube.com/iframe_api"></script>
+  <script src="./static/js/bulma-carousel.min.js"></script>
+  <script src="./static/js/bulma-slider.min.js"></script>
+  <link rel="icon" href="./resources/favicon.ico">
+</head>
+<body>
+
+<section class="hero is-light">
+  <div class="hero-body">
+    <div class="container">
+      <div class="columns is-centered">
+        <div class="column has-text-centered">
+            <h1 class="title is-1 publication-title">ICL_soft_object_world_model</h1>
+            <h2 style="display:block">
+              <span class="is-size-4">IEEE-RAS 24th International Conference on Humanoid Robots (Humanoids) 2025</span>
+            </h2>
+          <div class="is-size-4 publication-authors">
+            <span class="author-block">
+              <a href="">Hengyi Sim</a><sup>1</sup>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+              <a href="https://leph.io/quentinrouxel/">Quentin Rouxel</a><sup>1,2</sup>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+              <a href="https://feichenlab.com">Fei Chen</a><sup>2</sup>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+            </span>
+            <span class="author-block is-size-5" style="display:block">
+              <sup>2</sup>Department of Mechanical and Automation Engineering, T-Stone Robotics Institute, The Chinese University of Hong Kong, Hong Kong
+            </span>
+            <span class="author-block">
+              <img src="./resources/logos/logo_clover.gif" alt="logo clover" width="8%" style="margin:1%"></img>
+              <img src="./resources/logos/logo_cuhk.png" alt="logo cuhk" width="30%" style="margin:1%"></img>
+            </span>
+          </div>
+          <div class="column has-text-centered">
+            <div class="publication-links">
+              <span class="link-block">
+                <a href="resources/Soft_World_Paper.pdf"
+                   class="external-link button is-normal is-rounded is-dark is-size-5">
+                  <span class="icon">
+                      <i class="fas fa-file-pdf"></i>
+                  </span>
+                  <span>Paper</span>
+                </a>
+              </span>
+              <!-- <span class="link-block">
+                <a href="https://arxiv.org/abs/2505.19717"
+                   class="external-link button is-normal is-rounded is-dark is-size-5">
+                  <span class="icon">
+                      <i class="ai ai-arxiv"></i>
+                  </span>
+                  <span>ArXiv</span>
+                </a>
+              </span> -->
+              <!-- <span class="link-block">
+                <a href="https://hal.science/hal-05080807"
+                   class="external-link button is-normal is-rounded is-dark is-size-5">
+                  <span class="icon">
+                      <i class="ai ai-hal"></i>
+                  </span>
+                  <span>HAL</span>
+                </a>
+              </span> -->
+              <!-- <span class="link-block">
+                <a href="https://github.com/hucebot/extremum_flow_matching_code" 
+                   class="external-link button is-normal is-rounded is-dark is-size-5">
+                  <span class="icon">
+                    <i class="fab fa-github"></i>
+                  </span>
+                  <span>Code</span>
+                </a>
+              </span> -->
+              <!-- <span class="link-block">
+                <a href="https://youtu.be/5FszFNZ3CQg"
+                   class="external-link button is-normal is-rounded is-dark is-size-5">
+                  <span class="icon">
+                      <i class="fab fa-youtube"></i>
+                  </span>
+                  <span>Video</span>
+                </a>
+              </span> -->
+        <!-- </div> -->
+      <!-- </div> -->
+    </div>
+  </div>
+</section>
+
+<!-- <section class="section" style="padding-bottom: 0">
+  <div class="container">
+    <div class="columns is-centered has-text-centered">
+      <div class="column is-two-thirds no-bottom-padding">
+        <iframe height="500" src="https://www.youtube.com/embed/5FszFNZ3CQg" title="YouTube video player" frameborder="0" style="border: 1px solid #bbb; border-radius: 10px; width: 100%;" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+      </div>
+    </div>
+  </div>
+</section> -->
+
+<section class="section">
+  <div class="container">
+    <div class="columns is-centered has-text-centered">
+      <div class="column is-two-thirds">
+        <h2 class="title is-2">Abstract</h2>
+        <div class="row is-full-width">
+          <img src="resources/media/policy_architecture_talos_2.png" class="interpolation-image" alt="goal conditioned policy" style="display: block; margin-left: auto; margin-right: auto" />
+        </div>
+        <div class="content has-text-justified is-size-5">
+            <br/>
+            <p>Imitation learning is a promising approach for enabling generalist capabilities in humanoid robots, but its scaling is fundamentally constrained by the scarcity of high-quality expert demonstrations.
+This limitation can be mitigated by leveraging suboptimal, open-ended play data, often easier to collect and offering greater diversity.
+This work builds upon recent advances in generative modeling, specifically Flow Matching, an alternative to Diffusion models.
+We introduce a method for estimating the minimum or maximum of the learned distribution by leveraging the unique properties of Flow Matching, namely, deterministic transport and support for arbitrary source distributions.
+We apply this method to develop several goal-conditioned imitation and reinforcement learning algorithms based on Flow Matching, where policies are conditioned on both current and goal observations. We explore and compare different architectural configurations by combining core components, such as critic, planner, actor, or world model, in various ways. We evaluated our agents on the OGBench benchmark and analyzed how different demonstration behaviors during data collection affect performance in a 2D non-prehensile pushing task. Furthermore, we validated our approach on real hardware by deploying it on the Talos humanoid robot to perform complex manipulation tasks based on high-dimensional image observations, featuring a sequence of pick-and-place and articulated object manipulation in a realistic kitchen environment.</p>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="section">
+  <div class="container">
+    <div class="columns is-centered">
+      <div class="column is-full-width">
+            <h2 class="title is-2" style="width: 100%; text-align: center; padding-bottom: 10px;">Goal Conditioned Manipulation on Talos Humanoid Robot</h2>
+            <div class="row" style="margin-bottom: 10px">
+              <div class="col" style="padding-left: 10px; padding-right: 10px">
+                <video autoplay muted loop playsinline controls src="./resources/video/talos_kitchen_1.mp4" width="100%" style="border-radius:10px; "></video>
+              </div>
+              <div class="col" style="padding-left: 10px; padding-right: 10px">
+                <video autoplay muted loop playsinline controls src="./resources/video/talos_kitchen_5.mp4" width="100%" style="border-radius:10px; "></video>
+              </div>
+            </div>
+            <div class="row" style="margin-bottom: 10px">
+              <div class="col" style="padding-left: 10px; padding-right: 10px">
+                <video autoplay muted loop playsinline controls src="./resources/video/talos_kitchen_2.mp4" width="100%" style="border-radius:10px; "></video>
+              </div>
+              <div class="col" style="padding-left: 10px; padding-right: 10px">
+                <video autoplay muted loop playsinline controls src="./resources/video/talos_kitchen_3.mp4" width="100%" style="border-radius:10px; "></video>
+              </div>
+              <div class="col" style="padding-left: 10px; padding-right: 10px">
+                <video autoplay muted loop playsinline controls src="./resources/video/talos_kitchen_4.mp4" width="100%" style="border-radius:10px; "></video>
+              </div>
+            </div>
+            <div class="row" style="margin-bottom: 10px">
+              <div class="col" style="padding-left: 10px; padding-right: 10px">
+                <video autoplay muted loop playsinline controls src="./resources/video/talos_kitchen_6.mp4" width="100%" style="border-radius:10px; "></video>
+              </div>
+              <div class="col" style="padding-left: 10px; padding-right: 10px">
+                <video autoplay muted loop playsinline controls src="./resources/video/talos_kitchen_7.mp4" width="100%" style="border-radius:10px; "></video>
+              </div>
+              <div class="col" style="padding-left: 10px; padding-right: 10px">
+                <video autoplay muted loop playsinline controls src="./resources/video/talos_kitchen_8.mp4" width="100%" style="border-radius:10px; "></video>
+              </div>
+            </div>
+      </div> 
+    </div>
+  </div>
+</section>
+
+
+<section class="section">
+  <div class="container is-max-widescreen">
+    <div class="rows is-centered ">
+      <div class="row is-full-width">
+        <h2 class="title is-2" style="width: 100%; text-align: center; padding-bottom: 10px;">Methodology</h2>
+      </div>
+      <div class="row is-full-width">
+        <div class="columns is-centered is-full-width" style="width: 100%">
+          <div class="column content is-size-5 is-three-fifths">
+            <h3 class="title is-4">Objectives:</h3>
+            <ul>
+              <li>
+                Build a <strong>generalist</strong> humanoid robot capable of complex, long-horizon manipulation tasks.
+              </li>
+              <li>
+                Use <strong>goal-conditioned</strong> imitation learning with generative methods. No simulation, no reward design, or task labels required.
+              </li>
+              <li>
+                Learn from <strong>play data</strong>: open-ended, diverse, exploratory demonstrations not tied to specific tasks or goals.
+              </li>
+              <li>
+                Play data is easier and cheaper to collect, enabling scalable training across multiple tasks and environments.
+              </li>
+            </ul>
+          </div>
+        </div>
+      </div>
+      <div class="row is-full-width">
+        <div class="columns is-centered is-full-width" style="width: 100%">
+          <div class="column content is-size-5 is-three-fifths">
+            <h3 class="title is-4">Challenges:</h3>
+            <ul>
+              <li>
+                <strong>Optimality</strong>: Play data contains both direct and inefficient paths to reach goals. Agents must identify and prefer the most efficient actions.
+              </li>
+              <li>
+                <strong>Stitching</strong>: Full paths to specific distant goals are rarely demonstrated in play data. Agents must learn to piece together meaningful segments to reach long-horizon targets. 
+              </li>
+            </ul>
+          </div>
+        </div>
+      </div>
+      <div class="row is-three-fifths">
+        <img src="resources/media/challenges.png" class="interpolation-image" alt="GCRL Challenges" width="80%" style="display: block; margin-left: auto; margin-right: auto" />
+      </div>
+      <div class="row is-full-width">
+        <div class="columns is-centered is-full-width" style="width: 100%">
+          <div class="column content is-size-5 is-three-fifths">
+            <h3 class="title is-4">Main Ideas</h3>
+            <ul>
+              <li>
+                Introduce <strong>Extremum Flow Matching</strong> to address optimality by estimating minimum and maximum of conditional distributions.
+              </li>
+              <li>
+                Propose several <strong>goal-conditioned imitation and offline reinforcement learning</strong> agents based on Flow Matching.
+              </li>
+              <li>
+                Evaluate agents on <strong><a href="https://seohong.me/projects/ogbench/">OGBench</a></strong>, analyze the impact of data collection strategies, and validate on the real <strong>Talos humanoid robot</strong>.
+              </li>
+            </ul>
+          </div>
+        </div>
+      </div>
+      <div class="row is-full-width">
+        <a href="https://hucebot.github.io/seiko_controller_website/">
+          <img src="resources/media/seiko_retargeting_controller.png" class="interpolation-image" alt="SEIKO Retargeting and Controller" width="60%" style="display: block; margin-left: auto; margin-right: auto" />
+          <br/>
+        </a>
+      </div>
+      <div class="row is-full-width">
+        <div class="columns is-centered is-full-width" style="width: 100%">
+          <div class="column content is-size-5 is-three-fifths">
+            <h3 class="title is-4">Whole-Body Low-Level Controller</h3>
+            <ul>
+              <li>
+                Use our previous work <strong>SEIKO Retargeting and Controller</strong><br/>
+                <a href="https://hucebot.github.io/seiko_controller_website/">https://hucebot.github.io/seiko_controller_website/</a>
+              </li>
+              <li>
+                Retargeting from Cartesian position commands to whole-body commands with feasibility constraints
+              </li>
+            </ul>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="section">
+  <div class="container">
+    <div class="columns is-centered">
+      <div class="column is-two-thirds">
+            <h2 class="title is-2" style="width: 100%; text-align: center; padding-bottom: 10px;">Extremum Flow Matching</h2>
+            <div class="row" style="margin-bottom: 10px">
+              <div class="col" style="padding-left: 10px; padding-right: 10px">
+                <img src="resources/media/flow_extremum_concept.png" class="interpolation-image" alt="extremum flow matching" style="display: block; margin-left: auto; margin-right: auto" />
+              </div>
+              <div class="col" style="padding-left: 10px; padding-right: 10px">
+                <div class="content has-text-justified is-size-5">
+                    <ul>
+                        <li>
+                            Estimates the <strong>minimum or maximum</strong> of a distribution using <strong>Flow Matching</strong>.
+                        </li>
+                        <li>
+                            Leverages Flow Matching’s unique properties: <strong>deterministic transport</strong> and support for <strong>arbitrary source distributions</strong>, unlike Diffusion.
+                        </li>
+                        <li>
+                            Serves as a principled <strong>alternative to Expectile Regression</strong> for offline reinforcement learning.
+                        </li>
+                        <li>
+                            Extends to <strong>multi-dimensional distributions</strong> using a structured approach similar to the <strong>conditioning-on-returns</strong> framework.
+                        </li>
+                    </ul>
+                </div>
+              </div>
+            </div>
+            <div class="row" style="margin-bottom: 10px">
+              <div class="col" style="padding-left: 10px; padding-right: 10px">
+                <video autoplay muted loop playsinline controls src="./resources/video/animation_flow_baseline.mp4" width="100%" style="border-radius:10px; "></video>
+              </div>
+              <div class="col" style="padding-left: 10px; padding-right: 10px">
+                <video autoplay muted loop playsinline controls src="./resources/video/animation_flow_conditional.mp4" width="100%" style="border-radius:10px; "></video>
+              </div>
+            </div>
+      </div> 
+    </div>
+  </div>
+</section>
+
+<section class="section">
+  <div class="container">
+    <div class="columns is-centered">
+      <div class="column is-two-thirds">
+            <h2 class="title is-2" style="width: 100%; text-align: center; padding-bottom: 10px;">Goal Conditioned Agents</h2>
+            <div class="row" style="margin-bottom: 10px">
+             <p>This work explores and compares five architectures for goal-conditioned agents based on Extremum Flow Matching, experimenting with different ways to combine modular components like the Critic, Planner, Actor, and World Model.<p>
+            </div>
+            <div class="row" style="margin-bottom: 10px">
+                <img src="resources/media/agents.png" class="interpolation-image" alt="extremum flow matching agents" style="display: block; margin-left: auto; margin-right: auto" />
+            </div>
+      </div> 
+    </div>
+  </div>
+</section>
+
+<section class="section">
+  <div class="container">
+    <div class="columns is-centered">
+      <div class="column is-full-width">
+            <h2 class="title is-2" style="width: 100%; text-align: center; padding-bottom: 10px;">Comparison and Impact of Demonstration Behaviors</h2>
+            <div class="row" style="margin-bottom: 10px">
+              <div class="col" style="padding-left: 10px; padding-right: 10px">
+                <img src="resources/media/plot_FigExpPlanarDataset_expert.png" class="interpolation-image" alt="dataset expert" style="display: block; margin-left: auto; margin-right: auto" width="80%"/>
+              </div>
+              <div class="col" style="padding-left: 10px; padding-right: 10px">
+                <img src="resources/media/plot_FigExpPlanarDataset_play.png" class="interpolation-image" alt="dataset play in full" style="display: block; margin-left: auto; margin-right: auto" width="80%"/>
+              </div>
+              <div class="col" style="padding-left: 10px; padding-right: 10px">
+                <img src="resources/media/plot_FigExpPlanarDataset_stitch.png" class="interpolation-image" alt="dataset play in partitioned" style="display: block; margin-left: auto; margin-right: auto" width="80%"/>
+              </div>
+            </div> 
+            <div class="row" style="margin-bottom: 10px">
+              <div class="col" style="padding-left: 10px; padding-right: 10px">
+              </div>
+              <div class="col" style="padding-left: 10px; padding-right: 10px">
+                <h3 class="title is-6 subtitle">FM-GC</h3>
+              </div>
+              <div class="col" style="padding-left: 10px; padding-right: 10px">
+                <h3 class="title is-6 subtitle">FM-AC-no-RL</h3>
+              </div>
+              <div class="col" style="padding-left: 10px; padding-right: 10px">
+                <h3 class="title is-6 subtitle">FM-PC-no-RL</h3>
+              </div>
+              <div class="col" style="padding-left: 10px; padding-right: 10px">
+                <h3 class="title is-6 subtitle">FM-PS-no-RL</h3>
+              </div>
+              <div class="col" style="padding-left: 10px; padding-right: 10px">
+                <h3 class="title is-6 subtitle">FM-AS-no-RL</h3>
+              </div>
+              <div class="col" style="padding-left: 10px; padding-right: 10px">
+                <h3 class="title is-6 subtitle">FM-AC-use-RL</h3>
+              </div>
+              <div class="col" style="padding-left: 10px; padding-right: 10px">
+                <h3 class="title is-6 subtitle">FM-PC-use-RL</h3>
+              </div>
+              <div class="col" style="padding-left: 10px; padding-right: 10px">
+                <h3 class="title is-6 subtitle">FM-PS-use-RL</h3>
+              </div>
+              <div class="col" style="padding-left: 10px; padding-right: 10px">
+                <h3 class="title is-6 subtitle">FM-AS-use-RL</h3>
+              </div>
+            </div>
+            <div class="row" style="margin-bottom: 10px">
+              <div class="col" style="padding-left: 10px; padding-right: 10px">
+                <h3 class="title is-6 subtitle">Dataset Expert Reach Goal</h3>
+              </div>
+              <div class="col" style="padding-left: 10px; padding-right: 10px">
+                <video autoplay muted loop playsinline controls src="./resources/video/push_reach_goal_agent0_eval_5.mp4" width="100%"></video>
+              </div>
+              <div class="col" style="padding-left: 10px; padding-right: 10px">
+                <video autoplay muted loop playsinline controls src="./resources/video/push_reach_goal_agent1_norl_eval_5.mp4" width="100%"></video>
+              </div>
+              <div class="col" style="padding-left: 10px; padding-right: 10px">
+                <video autoplay muted loop playsinline controls src="./resources/video/push_reach_goal_agent2_norl_eval_5.mp4" width="100%"></video>
+              </div>
+              <div class="col" style="padding-left: 10px; padding-right: 10px">
+                <video autoplay muted loop playsinline controls src="./resources/video/push_reach_goal_agent5_norl_eval_5.mp4" width="100%"></video>
+              </div>
+              <div class="col" style="padding-left: 10px; padding-right: 10px">
+                <video autoplay muted loop playsinline controls src="./resources/video/push_reach_goal_agent6_norl_eval_5.mp4" width="100%"></video>
+              </div>
+              <div class="col" style="padding-left: 10px; padding-right: 10px">
+                <video autoplay muted loop playsinline controls src="./resources/video/push_reach_goal_agent1_withrl_eval_5.mp4" width="100%"></video>
+              </div>
+              <div class="col" style="padding-left: 10px; padding-right: 10px">
+                <video autoplay muted loop playsinline controls src="./resources/video/push_reach_goal_agent2_withrl_eval_5.mp4" width="100%"></video>
+              </div>
+              <div class="col" style="padding-left: 10px; padding-right: 10px">
+                <video autoplay muted loop playsinline controls src="./resources/video/push_reach_goal_agent5_withrl_eval_5.mp4" width="100%"></video>
+              </div>
+              <div class="col" style="padding-left: 10px; padding-right: 10px">
+                <video autoplay muted loop playsinline controls src="./resources/video/push_reach_goal_agent6_withrl_eval_5.mp4" width="100%"></video>
+              </div>
+            </div>
+            <div class="row" style="margin-bottom: 10px">
+              <div class="col" style="padding-left: 10px; padding-right: 10px">
+                <h3 class="title is-6 subtitle">Dataset Play in Full Space</h3>
+              </div>
+              <div class="col" style="padding-left: 10px; padding-right: 10px">
+                <video autoplay muted loop playsinline controls src="./resources/video/push_play_full_agent0_eval_5.mp4" width="100%"></video>
+              </div>
+              <div class="col" style="padding-left: 10px; padding-right: 10px">
+                <video autoplay muted loop playsinline controls src="./resources/video/push_play_full_agent1_norl_eval_5.mp4" width="100%"></video>
+              </div>
+              <div class="col" style="padding-left: 10px; padding-right: 10px">
+                <video autoplay muted loop playsinline controls src="./resources/video/push_play_full_agent2_norl_eval_5.mp4" width="100%"></video>
+              </div>
+              <div class="col" style="padding-left: 10px; padding-right: 10px">
+                <video autoplay muted loop playsinline controls src="./resources/video/push_play_full_agent5_norl_eval_5.mp4" width="100%"></video>
+              </div>
+              <div class="col" style="padding-left: 10px; padding-right: 10px">
+                <video autoplay muted loop playsinline controls src="./resources/video/push_play_full_agent6_norl_eval_5.mp4" width="100%"></video>
+              </div>
+              <div class="col" style="padding-left: 10px; padding-right: 10px">
+                <video autoplay muted loop playsinline controls src="./resources/video/push_play_full_agent1_withrl_eval_5.mp4" width="100%"></video>
+              </div>
+              <div class="col" style="padding-left: 10px; padding-right: 10px">
+                <video autoplay muted loop playsinline controls src="./resources/video/push_play_full_agent2_withrl_eval_5.mp4" width="100%"></video>
+              </div>
+              <div class="col" style="padding-left: 10px; padding-right: 10px">
+                <video autoplay muted loop playsinline controls src="./resources/video/push_play_full_agent5_withrl_eval_5.mp4" width="100%"></video>
+              </div>
+              <div class="col" style="padding-left: 10px; padding-right: 10px">
+                <video autoplay muted loop playsinline controls src="./resources/video/push_play_full_agent6_withrl_eval_5.mp4" width="100%"></video>
+              </div>
+            </div>
+            <div class="row" style="margin-bottom: 10px">
+              <div class="col" style="padding-left: 10px; padding-right: 10px">
+                <h3 class="title is-6 subtitle">Dataset Play in Partitioned Spaces</h3>
+              </div>
+              <div class="col" style="padding-left: 10px; padding-right: 10px">
+                <video autoplay muted loop playsinline controls src="./resources/video/push_play_stitch_agent0_eval_5.mp4" width="100%" style="border-radius:10px; "></video>
+              </div>
+              <div class="col" style="padding-left: 10px; padding-right: 10px">
+                <video autoplay muted loop playsinline controls src="./resources/video/push_play_stitch_agent1_norl_eval_5.mp4" width="100%"></video>
+              </div>
+              <div class="col" style="padding-left: 10px; padding-right: 10px">
+                <video autoplay muted loop playsinline controls src="./resources/video/push_play_stitch_agent2_norl_eval_5.mp4" width="100%"></video>
+              </div>
+              <div class="col" style="padding-left: 10px; padding-right: 10px">
+                <video autoplay muted loop playsinline controls src="./resources/video/push_play_stitch_agent5_norl_eval_5.mp4" width="100%"></video>
+              </div>
+              <div class="col" style="padding-left: 10px; padding-right: 10px">
+                <video autoplay muted loop playsinline controls src="./resources/video/push_play_stitch_agent6_norl_eval_5.mp4" width="100%"></video>
+              </div>
+              <div class="col" style="padding-left: 10px; padding-right: 10px">
+                <video autoplay muted loop playsinline controls src="./resources/video/push_play_stitch_agent1_withrl_eval_5.mp4" width="100%"></video>
+              </div>
+              <div class="col" style="padding-left: 10px; padding-right: 10px">
+                <video autoplay muted loop playsinline controls src="./resources/video/push_play_stitch_agent2_withrl_eval_5.mp4" width="100%"></video>
+              </div>
+              <div class="col" style="padding-left: 10px; padding-right: 10px">
+                <video autoplay muted loop playsinline controls src="./resources/video/push_play_stitch_agent5_withrl_eval_5.mp4" width="100%"></video>
+              </div>
+              <div class="col" style="padding-left: 10px; padding-right: 10px">
+                <video autoplay muted loop playsinline controls src="./resources/video/push_play_stitch_agent6_withrl_eval_5.mp4" width="100%"></video>
+              </div>
+            </div>
+      </div> 
+    </div>
+  </div>
+</section>
+
+<section class="section" id="BibTeX">
+  <div class="container content">
+    <div class="rows is-centered ">
+      <div class="row is-full-width">
+        <h2 class="title is-2" style="width: 100%; text-align: center; padding-bottom: 10px;">BibTeX</h2>
+      </div>
+      <div class="row is-full-width">
+          <a href="resources/extremum_flow_matching_2025.pdf"><img src="resources/pages.png" class="interpolation-image" alt="Paper pages" style="display: block; margin-left: auto; margin-right: auto; width: 70%" /></a>
+      </div>
+      <div class="row is-full-width">
+        <pre><code>@inproceedings{rouxel2025extremumflowmatching,
+  title={Extremum Flow Matching for Offline Goal Conditioned Reinforcement Learning}, 
+  author={Rouxel, Quentin and Donoso, Clemente and Chen, Fei and Ivaldi, Serena and Mouret, Jean-Baptiste},
+  booktitle={2025 IEEE-RAS 24th International Conference on Humanoid Robots (Humanoids)},
+  year={2025},
+  organization={IEEE}
+}</code></pre>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="section">
+    <div class="container">
+        <h2 class="title is-2" style="width: 100%; text-align: center; padding-bottom: 10px;">Related Projects</h2>
+        <div class="columns is-centered">
+            <!--
+            <div class="column box">
+                <span class="pub-year2">2025</span>
+                <a href="https://hucebot.github.io/extremum_flow_matching_website/">
+                    <img src="thumb/extremum_flow_matching.png"/>
+                <span class="pub-title">Extremum Flow Matching</span>
+                </a>
+            </div>
+            -->
+            <div class="column box">
+                <h4>Flow Multi-Support (2024)</h4>
+                <a href="https://hucebot.github.io/flow_multisupport_website/">
+                <img src="resources/media/flow_multisupport.png"/>
+                </a>
+            </div>
+            <div class="column box">
+                <h4>Words2Contact (2024)</h4>
+                <span>2024</span>
+                <a href="https://hucebot.github.io/words2contact_website/">
+                <img src="resources/media/words2contact.png"/>
+                </a>
+            </div>
+            <div class="column box">
+                <h4>SEIKO Controller (2023)</h4>
+                <a href="https://hucebot.github.io/seiko_controller_website/">
+                <img src="resources/media/seiko_controller.png"/>
+                </a>
+            </div>
+        </div>
+    </div>
+</section>
+
+</body>
+</html>
+
