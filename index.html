@@ -118,11 +118,7 @@
         </div>
         <div class="content has-text-justified is-size-5">
             <br/>
-            <p>Imitation learning is a promising approach for enabling generalist capabilities in humanoid robots, but its scaling is fundamentally constrained by the scarcity of high-quality expert demonstrations.
-This limitation can be mitigated by leveraging suboptimal, open-ended play data, often easier to collect and offering greater diversity.
-This work builds upon recent advances in generative modeling, specifically Flow Matching, an alternative to Diffusion models.
-We introduce a method for estimating the minimum or maximum of the learned distribution by leveraging the unique properties of Flow Matching, namely, deterministic transport and support for arbitrary source distributions.
-We apply this method to develop several goal-conditioned imitation and reinforcement learning algorithms based on Flow Matching, where policies are conditioned on both current and goal observations. We explore and compare different architectural configurations by combining core components, such as critic, planner, actor, or world model, in various ways. We evaluated our agents on the OGBench benchmark and analyzed how different demonstration behaviors during data collection affect performance in a 2D non-prehensile pushing task. Furthermore, we validated our approach on real hardware by deploying it on the Talos humanoid robot to perform complex manipulation tasks based on high-dimensional image observations, featuring a sequence of pick-and-place and articulated object manipulation in a realistic kitchen environment.</p>
+            <p>Robust manipulation of soft objects, such as garments, is a critical skill for service and household robots to adopt, but remains challenging due to its high-dimensional state space, and material-dependent deformations. Humans address this challenge by using mental world models that "imagine" the shape and material properties from partial observations, which enables them to predict how actions affect future states. As such, embedding such world models in robots allows for better generalization in manipulating a wide variety of garments in the real world. However, learned world models typically require large amounts of real world data that is strenuous to collect, and a mechanism to infer latent properties that govern dynamics. We present a Soft-Object World Model that performs generative full-state estimation and action-conditioned dynamics prediction using a transformer backbone trained on large-scale simulated soft object interactions, with measures to mitigate the sim-to-real gap. By learning to infer latent shape and material cues through in-context learning over a variable-length partial point-cloud history, the model generalizes across robot embodiments, material parameters, garment types and shapes, and manipulation coordination modes without weight updates. The world model is then integrated with a Goal-Conditioned action planner for motion synthesis. We validate the approach in simulation and real world for bimanual garment folding, reporting improvements in reconstruction fidelity, prediction accuracy, and task success.</p>
         </div>
       </div>
     </div>
@@ -471,7 +467,7 @@ We apply this method to develop several goal-conditioned imitation and reinforce
         <h2 class="title is-2" style="width: 100%; text-align: center; padding-bottom: 10px;">BibTeX</h2>
       </div>
       <div class="row is-full-width">
-          <a href="resources/extremum_flow_matching_2025.pdf"><img src="resources/pages.png" class="interpolation-image" alt="Paper pages" style="display: block; margin-left: auto; margin-right: auto; width: 70%" /></a>
+          <a href="resources/Soft_World_Paper.pdf"><img src="resources/pages.png" class="interpolation-image" alt="Paper pages" style="display: block; margin-left: auto; margin-right: auto; width: 70%" /></a>
       </div>
       <div class="row is-full-width">
         <pre><code>@inproceedings{rouxel2025extremumflowmatching,
