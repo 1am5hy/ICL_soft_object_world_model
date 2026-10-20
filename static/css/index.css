@@ -174,3 +174,101 @@ body {
   margin-top: 0.5em;
 }
 
+#talos-demos .row {
+  margin: 0 !important;
+  gap: 0 !important;
+  flex-wrap: nowrap;
+}
+
+#talos-demos .row > [class*="col-"] {
+  padding: 0 !important;
+  min-width: 0;
+  background: #fff;
+}
+
+.vid-crop {
+  width: 100%;
+  height: 100%;
+  overflow: hidden;
+  line-height: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.vid-crop video {
+  width: 100%;
+  height: 100%;
+  max-width: none;
+  display: block;
+  object-fit: cover;
+  object-position: left center;
+  border-radius: 0 !important;
+}
+
+.plot-crop {
+  overflow: hidden;
+  position: relative;
+  width: 100%;
+  aspect-ratio: var(--plot-aspect);
+  line-height: 0;
+  background: #fff;
+}
+
+.plot-crop img {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: auto;
+  display: block;
+  transform: translateY(calc(var(--crop, 15.5%) * -1));
+}
+
+.tk-fold-row {
+  display: flex;
+  align-items: center;
+  gap: 2rem;
+  margin-top: 0.5rem;
+}
+
+.tk-fold {
+  flex: 0 0 38%;
+  margin-left: calc(50% - 38% - 1.25rem);
+  aspect-ratio: 823 / 1072;
+  overflow: hidden;
+  line-height: 0;
+  background: #fff;
+}
+
+.tk-fold video {
+  width: calc(100% * 1920 / 823);
+  height: 100%;
+  max-width: none;
+  display: block;
+  object-fit: fill;
+  object-position: left center;
+}
+
+.tk-fold-text {
+  flex: 1 1 auto;
+  min-width: 0;
+  margin-right: 4%;
+}
+
+@media (max-width: 768px) {
+  .tk-fold-row {
+    flex-direction: column;
+  }
+
+  .tk-fold {
+    flex-basis: 70%;
+    margin-left: auto;
+    margin-right: auto;
+  }
+
+  .tk-fold-text {
+    margin-right: 0;
+  }
+}
+
