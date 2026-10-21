@@ -441,7 +441,7 @@
             <h2 class="title is-2" style="width: 100%; text-align: center; padding-bottom: 10px;">Cross Embodiment Experiments</h2>
             <div class="tk-fold-row">
               <div class="tk-fold">
-                <video preload="metadata" autoplay muted loop playsinline src="./resources/video2/tk_full_fold.mp4"></video>
+                <video preload="none" muted loop playsinline data-src="./resources/video2/tk_full_fold.mp4"></video>
               </div>
               <div class="tk-fold-text content has-text-justified is-size-5">
                 <ul>
@@ -799,21 +799,26 @@
     return true;
   }
 
-  function markReady(wrap, video) {
-    wrap.classList.add('is-ready');
-    video.play().catch(function () {});
-  }
-
   function loadVideo(video) {
     if (video.dataset.loaded === '1') return;
     var src = video.getAttribute('data-src');
     if (!src) return;
     video.dataset.loaded = '1';
-    video.addEventListener('loadeddata', function () {
-      video.play().catch(function () {});
-    }, { once: true });
     video.src = src;
     video.load();
+  }
+
+  function wantPlay(video) {
+    return video.dataset.inView === '1';
+  }
+
+  function syncPlay(video) {
+    if (wantPlay(video)) {
+      if (video.dataset.loaded !== '1' && video.getAttribute('data-src')) loadVideo(video);
+      if (video.readyState >= 2) video.play().catch(function () {});
+    } else {
+      if (!video.paused) video.pause();
+    }
   }
 
   root.querySelectorAll('video').forEach(function (video) {
@@ -823,30 +828,71 @@
     wrap.appendChild(video);
     applyBaked(wrap, video);
     video.addEventListener('loadeddata', function () {
-      markReady(wrap, video);
+      wrap.classList.add('is-ready');
+      syncPlay(video);
+    });
+    // If decode stalls (common with many concurrent videos), keep trying while visible.
+    video.addEventListener('waiting', function () {
+      if (wantPlay(video)) video.play().catch(function () {});
+    });
+    video.addEventListener('canplay', function () {
+      syncPlay(video);
     });
   });
 
   layoutSmall();
   layoutBig();
 
-  var lazyVideos = Array.prototype.slice.call(document.querySelectorAll('video[data-src]'));
-  function observeLazy() {
+  var allLazy = Array.prototype.slice.call(document.querySelectorAll('video[data-src]'));
+  // Include the TienKung clip (outside #talos-demos) in the same play manager.
+  allLazy.forEach(function (video) {
+    if (video.closest('#talos-demos')) return;
+    video.addEventListener('loadeddata', function () {
+      syncPlay(video);
+    });
+    video.addEventListener('canplay', function () {
+      syncPlay(video);
+    });
+  });
+
+  function observeVideos() {
     if (!('IntersectionObserver' in window)) {
-      lazyVideos.forEach(loadVideo);
+      allLazy.forEach(function (video) {
+        video.dataset.inView = '1';
+        loadVideo(video);
+        syncPlay(video);
+      });
       return;
     }
-    var io = new IntersectionObserver(function (entries) {
+
+    // Start download a little before the row enters view.
+    var preloadIO = new IntersectionObserver(function (entries) {
       entries.forEach(function (entry) {
         if (!entry.isIntersecting) return;
-        var video = entry.target;
-        io.unobserve(video);
-        loadVideo(video);
+        loadVideo(entry.target);
+        preloadIO.unobserve(entry.target);
       });
-    }, { rootMargin: '240px 0px', threshold: 0.01 });
-    lazyVideos.forEach(function (video) { io.observe(video); });
+    }, { rootMargin: '120px 0px', threshold: 0.01 });
+
+    // Only decode/play while substantially on screen — pauses offscreen clips to stop stutter.
+    var playIO = new IntersectionObserver(function (entries) {
+      entries.forEach(function (entry) {
+        var video = entry.target;
+        if (entry.isIntersecting && entry.intersectionRatio >= 0.25) {
+          video.dataset.inView = '1';
+        } else {
+          video.dataset.inView = '0';
+        }
+        syncPlay(video);
+      });
+    }, { rootMargin: '0px', threshold: [0, 0.25, 0.5, 0.75] });
+
+    allLazy.forEach(function (video) {
+      preloadIO.observe(video);
+      playIO.observe(video);
+    });
   }
-  observeLazy();
+  observeVideos();
 
   window.addEventListener('resize', function () {
     layoutSmall();
