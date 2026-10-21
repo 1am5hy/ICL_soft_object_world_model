@@ -441,7 +441,7 @@
             <h2 class="title is-2" style="width: 100%; text-align: center; padding-bottom: 10px;">Cross Embodiment Experiments</h2>
             <div class="tk-fold-row">
               <div class="tk-fold">
-                <video preload="none" muted loop playsinline data-src="./resources/video2/tk_full_fold.mp4"></video>
+                <video preload="metadata" autoplay muted loop playsinline src="./resources/video2/tk_full_fold.mp4"></video>
               </div>
               <div class="tk-fold-text content has-text-justified is-size-5">
                 <ul>
@@ -809,6 +809,9 @@
     var src = video.getAttribute('data-src');
     if (!src) return;
     video.dataset.loaded = '1';
+    video.addEventListener('loadeddata', function () {
+      video.play().catch(function () {});
+    }, { once: true });
     video.src = src;
     video.load();
   }
