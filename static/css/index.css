@@ -256,7 +256,7 @@ body {
   max-width: none;
   display: block;
   object-fit: cover;
-  object-position: center center;
+  object-position: left center;
   border-radius: 0 !important;
 }
 
@@ -289,25 +289,20 @@ body {
 .tk-fold {
   flex: 0 0 38%;
   margin-left: calc(50% - 38% - 1.25rem);
-  aspect-ratio: 546 / 714;
+  /* Compressed 1280x714 frame; content is left ~550px (cropdetect) */
+  aspect-ratio: 550 / 714;
   overflow: hidden;
   line-height: 0;
   background: #f3f3f3;
-  opacity: 0;
-}
-
-.tk-fold.is-ready {
-  opacity: 1;
-  transition: opacity 0.2s ease;
 }
 
 .tk-fold video {
-  width: 100%;
+  width: calc(100% * 1280 / 550);
   height: 100%;
   max-width: none;
   display: block;
-  object-fit: cover;
-  object-position: center center;
+  object-fit: fill;
+  object-position: left center;
 }
 
 .tk-fold-text {
