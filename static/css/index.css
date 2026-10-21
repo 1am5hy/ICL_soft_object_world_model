@@ -86,6 +86,53 @@ body {
   display: inline-block;
 }
 
+.author-row {
+  display: flex;
+  flex-wrap: nowrap;
+  justify-content: center;
+  align-items: baseline;
+  gap: 0.85rem;
+  white-space: nowrap;
+  line-height: 1.35;
+}
+
+.author-row a {
+  white-space: nowrap;
+}
+
+.logo-row {
+  display: flex;
+  flex-wrap: nowrap;
+  justify-content: center;
+  align-items: center;
+  gap: 1.25rem;
+  margin-top: 1.25rem;
+  margin-bottom: 0.5rem;
+}
+
+.logo-row img {
+  height: 91px;
+  width: auto;
+  max-width: none;
+  object-fit: contain;
+  background: transparent;
+  margin: 0;
+}
+
+@media (max-width: 900px) {
+  .author-row {
+    gap: 0.55rem;
+  }
+
+  .logo-row {
+    gap: 0.75rem;
+  }
+
+  .logo-row img {
+    height: 70px;
+  }
+}
+
 .publication-banner img {
 }
 
